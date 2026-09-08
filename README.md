@@ -1,20 +1,94 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# AK Cine Portraits
 
-# Run and deploy your AI Studio app
+Premium photography & cinematography portfolio website for weddings, portraits, couple sessions, and life's emotional moments.
 
-This contains everything you need to run your app locally.
+**Live Demo:** [https://ak-cine-portraits.github.io](https://ak-cine-portraits.github.io)
 
-View your app in AI Studio: https://ai.studio/apps/cb5ee363-13b6-4def-9232-77e37e4da8e1
+## Tech Stack
+
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS 4
+- Lucide React icons
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+**Prerequisites:** Node.js 18+
 
+```bash
+# Install dependencies
+npm install
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# Start dev server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000)
+
+## Build
+
+```bash
+npm run build
+```
+
+Output goes to `dist/`.
+
+## Deploy to GitHub Pages
+
+### Option 1: Automatic (GitHub Actions)
+
+1. Push to GitHub
+2. Go to **Settings > Pages**
+3. Under **Source**, select **GitHub Actions**
+4. Create `.github/workflows/deploy.yml` (see below)
+
+```yaml
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### Option 2: Manual deploy
+
+```bash
+npm run build
+# Then upload the dist/ folder contents to your hosting provider
+```
+
+## Customization
+
+- **Portfolio data:** Edit `src/data/portfolioData.ts` to update services, gallery items, and studio config
+- **Images:** Replace Unsplash URLs with your own photography
+- **Contact info:** Update phone number and social links in `STUDIO_CONFIG`
+
+## License
+
+All rights reserved. AK Cine Portraits 2026.

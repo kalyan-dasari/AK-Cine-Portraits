@@ -1,6 +1,0 @@
-{
-  "name": "AK Cine Portraits",
-  "description": "Premium photography and cinematography portfolio for weddings, portraits, couple shoots, and emotional visual storytelling.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
